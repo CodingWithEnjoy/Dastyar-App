@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4-Page App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page1 active">
+      <div class="page1-row">
+        <div class="clock">
+          <h2 id="time">--:--:--</h2>
+          <p id="date">Loading date...</p>
+          <p id="date2" dir="ltr">Loading date...</p>
+        </div>
+        <div class="weather">
+          <div class="row">
+            <img id="weather-image" alt="Weather icon" />
+            <h2 id="weather">Loading weather...</h2>
+          </div>
+          <p id="date-description"></p>
+          <p id="location"></p>
+        </div>
+      </div>
+
+      <ul class="task-list"></ul>
+    </div>
+
+    <div class="page page2">
+      <div class="todo">
+        <div class="inputs">
+          <div class="col">
+            <input type="text" id="task-title" placeholder="تسک" />
+            <input type="text" id="task-description" placeholder="توضیحات" />
+          </div>
+
+          <button id="add-task-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+              height="35px"
+              width="35px"
+              fill="#293753"
+            >
+              <path
+                d="M423.41-424.17H221.24q-23.67 0-40.13-16.63-16.46-16.62-16.46-39.96 0-23.67 16.46-40.13t40.13-16.46h202.17v-202.41q0-23.34 16.63-39.96 16.62-16.63 39.96-16.63t39.96 16.63q16.63 16.62 16.63 39.96v202.41h202.17q23.67 0 40.13 16.46t16.46 40.01q0 23.55-16.46 40.13-16.46 16.58-40.13 16.58H536.59V-222q0 23.34-16.63 39.96-16.62 16.63-39.96 16.63t-39.96-16.63q-16.63-16.62-16.63-39.96v-202.17Z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <ul class="task-list"></ul>
+      </div>
+    </div>
+
+    <div class="page page3">
+      <div id="tileContainer"></div>
+    </div>
+
+    <div class="page page4">
+      <ul id="newspaper-list"></ul>
+    </div>
+
+    <div class="bottom-bar">
+      <button data-page="page1" class="active">خانه</button>
+      <button data-page="page2">تسک ها</button>
+      <button data-page="page3">قیمت</button>
+      <button data-page="page4">اخبار</button>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
