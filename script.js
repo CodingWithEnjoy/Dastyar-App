@@ -326,7 +326,7 @@ fetch(API_URL)
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/sw.js")
+    .register("sw.js")
     .then(() => console.log("Service Worker Registered"))
     .catch((error) =>
       console.error("Service Worker Registration Failed:", error)
