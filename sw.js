@@ -2,12 +2,12 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open("pwa-cache").then((cache) => {
       return cache.addAll([
-        "/",
-        "/index.html",
-        "/style.css",
-        "/script.js",
-        "/assets/logo1.jpg",
-        "/assets/logo2.jpg",
+        "https://codingwithenjoy.github.io/Dastyar-App/",
+        "https://codingwithenjoy.github.io/Dastyar-App/index.html",
+        "https://codingwithenjoy.github.io/Dastyar-App/style.css",
+        "https://codingwithenjoy.github.io/Dastyar-App/script.js",
+        "https://codingwithenjoy.github.io/Dastyar-App/assets/logo1.jpg",
+        "https://codingwithenjoy.github.io/Dastyar-App/assets/logo2.jpg",
       ]);
     })
   );
