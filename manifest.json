@@ -5,7 +5,7 @@
   "start_url": "https://codingwithenjoy.github.io/Dastyar-App/",
   "display": "standalone",
   "background_color": "#7f75bd",
-  "theme_color": "#d4e2e5",
+  "theme_color": "#7f75bd",
   "icons": [
     {
       "src": "assets/logo1.jpg",
