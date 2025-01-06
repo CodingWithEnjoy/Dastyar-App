@@ -2,11 +2,14 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
     <meta name="theme-color" content="#d4e2e5" />
     <link rel="manifest" href="manifest.json" />
-    <link rel="shortcut icon" href="assets/logo1.jpg" type="image/jpg">
+    <link rel="shortcut icon" href="assets/logo1.jpg" type="image/jpg" />
     <link rel="stylesheet" href="style.css" />
     <title>Dastyar</title>
   </head>
@@ -71,7 +74,21 @@
     </div>
 
     <div class="page page4">
-      <ul id="newspaper-list"></ul>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="digiato-list">دیجیاتو</button>
+        <button class="tab-btn" data-tab="vigiato-list">ویجیاتو</button>
+        <button class="tab-btn" data-tab="isna-list">مهر نیوز</button>
+      </div>
+
+      <div id="digiato-list" class="tab-content active">
+        <ul class="news-list"></ul>
+      </div>
+      <div id="vigiato-list" class="tab-content">
+        <ul class="news-list"></ul>
+      </div>
+      <div id="isna-list" class="tab-content">
+        <ul class="news-list"></ul>
+      </div>
 
       <div id="news-modal" class="modal">
         <div class="modal-content">

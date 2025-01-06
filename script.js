@@ -201,31 +201,67 @@ async function fetchData() {
 
 fetchData();
 
-(async function scrapeDigiato() {
-  const response = await fetch("https://digiato.com/daily-timeline");
+(async function setupTabs() {
+  const tabs = document.querySelectorAll(".tab-btn");
+  const contents = document.querySelectorAll(".tab-content");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((btn) => btn.classList.remove("active"));
+      contents.forEach((content) => content.classList.remove("active"));
+
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.tab).classList.add("active");
+    });
+  });
+})();
+
+async function fetchArticles(url, containerId, type = "default") {
+  const response = await fetch(url);
   const html = await response.text();
 
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
+  let articles = [];
 
-  const rows = doc.querySelectorAll(".rowCard");
-  const articles = Array.from(rows).map((row) => {
-    const title = row.querySelector(".rowCard__title")?.textContent.trim();
-    const description = row
-      .querySelector(".rowCard__description")
-      ?.textContent.trim();
-    const date = row.querySelector(".rowCard__date")?.textContent.trim();
-    const author = row.querySelector(".rowCard__author a")?.textContent.trim();
-    const imageElement = row.querySelector(".rowCard__picture img");
-    const image =
-      imageElement?.getAttribute("src") ||
-      imageElement?.getAttribute("data-src");
-    const link = row.querySelector(".rowCard__title")?.getAttribute("href");
+  if (type === "default") {
+    const rows = doc.querySelectorAll(".rowCard");
+    articles = Array.from(rows).map((row) => {
+      const title = row.querySelector(".rowCard__title")?.textContent.trim();
+      const description = row
+        .querySelector(".rowCard__description")
+        ?.textContent.trim();
+      const date = row.querySelector(".rowCard__date")?.textContent.trim();
+      const author = row
+        .querySelector(".rowCard__author a")
+        ?.textContent.trim();
+      const imageElement = row.querySelector(".rowCard__picture img");
+      const image =
+        imageElement?.getAttribute("src") ||
+        imageElement?.getAttribute("data-src");
+      const link = row.querySelector(".rowCard__title")?.getAttribute("href");
 
-    return { title, description, date, image, author, link };
-  });
+      return { title, description, date, image, author, link };
+    });
+  } else if (type === "isna") {
+    const newsItems = doc.querySelectorAll(".news");
+    articles = Array.from(newsItems).map((item) => {
+      const title = item.querySelector(".desc h3 a")?.textContent.trim();
+      const description = item.querySelector(".desc p")?.textContent.trim();
+      const link = item.querySelector(".desc h3 a")?.getAttribute("href");
+      const date = item.querySelector(".desc time a")?.textContent.trim();
+      const imageElement = item.querySelector("img");
+      const image =
+        imageElement?.getAttribute("src") ||
+        imageElement?.getAttribute("data-src");
 
-  const list = document.getElementById("newspaper-list");
+      return { title, description, date, image, link, type };
+    });
+  }
+
+  const list = document.querySelector(`#${containerId} .news-list`);
+  list.innerHTML = "";
+
   articles.forEach((article) => {
     const listItem = document.createElement("li");
     listItem.style.listStyleType = "none";
@@ -235,9 +271,9 @@ fetchData();
         <img src="${article.image}" alt="${article.title}">
         <div class="news-data">
           <h2 class="news-title">${article.title}</h2>
-          <p>${article.description}</p>
+          <p>${article.description || "No description available"}</p>
         </div>
-        <div class="news-date"><p>${article.date} - ${article.author}</p></div>
+        <div class="news-date"><p>${article.date || "Unknown date"}</p></div>
       </div>
     `;
 
@@ -257,37 +293,65 @@ fetchData();
       modal.classList.add("show");
       document.body.style.overflow = "hidden";
 
-      const postResponse = await fetch(article.link);
+      console.log(article.link);
+
+      let articleLink = article.link;
+
+      if (article.type === "isna") {
+        articleLink = `https://mehrnews.ir/${article.link}`;
+      }
+
+      const postResponse = await fetch(
+        `https://corsproxy.io/?url=${articleLink}`
+      );
+
       const postHtml = await postResponse.text();
       const postDoc = parser.parseFromString(postHtml, "text/html");
-      const postContent = postDoc.querySelector(".articlePost")?.innerHTML;
+      const postContent =
+        postDoc.querySelector(".articlePost")?.innerHTML ||
+        postDoc.querySelector(".item-text")?.innerHTML;
 
       modalContent.innerHTML = postContent || "<p>محتوای پست لود نمیشه :(</p>";
     });
 
     list.appendChild(listItem);
   });
+}
 
-  const modal = document.getElementById("news-modal");
-  const closeModalBtn = modal.querySelector(".close-btn");
+function initializeFetch() {
+  fetchArticles("https://digiato.com/daily-timeline", "digiato-list");
+  fetchArticles(
+    "https://corsproxy.io/?url=https://vigiato.net/daily-timeline",
+    "vigiato-list"
+  );
+  fetchArticles(
+    "https://corsproxy.io/?url=https://www.mehrnews.com/archive",
+    "isna-list",
+    "isna"
+  );
+}
 
-  const closeModal = () => {
-    modal.classList.remove("show");
-    modal.classList.add("hide");
+initializeFetch();
 
-    setTimeout(() => {
-      document.body.style.overflow = "visible";
-    }, 500);
-  };
+const modal = document.getElementById("news-modal");
+const closeModalBtn = modal.querySelector(".close-btn");
 
-  closeModalBtn.addEventListener("click", closeModal);
+const closeModal = () => {
+  modal.classList.remove("show");
+  modal.classList.add("hide");
 
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
-})();
+  setTimeout(() => {
+    document.body.style.overflow = "visible";
+  }, 500);
+};
+
+closeModalBtn.addEventListener("click", closeModal);
+
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
 
 const API_URL = "https://api2.waqi.info/api/feed/@10652/aqi.json";
 const card = document.getElementById("aqi-card");
