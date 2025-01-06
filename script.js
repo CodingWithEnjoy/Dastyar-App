@@ -273,7 +273,12 @@ async function fetchArticles(url, containerId, type = "default") {
           <h2 class="news-title">${article.title}</h2>
           <p>${article.description || "No description available"}</p>
         </div>
-        <div class="news-date"><p>${article.date || "Unknown date"}</p></div>
+        <div class="news-date">
+          <p>
+            ${article.date || "Unknown date"} 
+            ${article.author ? `- ${article.author}` : ""}
+          </p>
+        </div>
       </div>
     `;
 
@@ -353,38 +358,41 @@ window.addEventListener("click", (event) => {
   }
 });
 
-const API_URL = "https://api2.waqi.info/api/feed/@10652/aqi.json";
+const PROXY_URL = "https://corsproxy.io/?url=";
+const CITY_URL = "https://aqicn.org/city/tehran/";
+const FULL_URL = `${PROXY_URL}${encodeURIComponent(CITY_URL)}`;
+
 const card = document.getElementById("aqi-card");
 const aqiValue = document.getElementById("aqi-value");
-const dominantPol = document.getElementById("dominant-pol");
 
-fetch(API_URL)
+fetch(FULL_URL)
   .then((response) => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    return response.json();
+    return response.text();
   })
-  .then((data) => {
-    const aqi = data.rxs.obs[0].msg.aqi;
-    const pol = data.rxs.obs[0].msg.dominentpol;
+  .then((html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    const aqi = doc.querySelector(".aqivalue").textContent.trim();
 
     aqiValue.textContent = `${aqi}`;
-    dominantPol.textContent = `آلودگی : ${pol}`;
 
-    if (aqi >= 150) {
+    const aqiNum = parseInt(aqi, 10);
+    if (aqiNum >= 150) {
       aqiValue.style.backgroundColor = "#ff00009e";
-    } else if (aqi >= 100) {
+    } else if (aqiNum >= 100) {
       aqiValue.style.backgroundColor = "#ffa5009e";
-    } else if (aqi >= 50) {
+    } else if (aqiNum >= 50) {
       aqiValue.style.backgroundColor = "#ffff009e";
     } else {
       aqiValue.style.backgroundColor = "#00c80085";
     }
   })
   .catch((error) => {
-    aqiValue.textContent = "";
-    dominantPol.textContent = "";
+    aqiValue.textContent = "Error";
     console.error("Fetch error:", error);
   });
 
