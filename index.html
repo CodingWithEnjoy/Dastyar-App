@@ -100,21 +100,196 @@
       </div>
     </div>
 
+    <div class="page page5">
+      <div class="calculator">
+        <div class="display" id="display" dir="ltr"></div>
+        <div class="buttons">
+          <button class="button edge" onclick="appendToDisplay('/')">/</button>
+          <button class="button edge" onclick="appendToDisplay(')')">(</button>
+          <button class="button edge" onclick="appendToDisplay('(')">)</button>
+          <button class="button edge" onclick="backspace()">C</button>
+
+          <button class="button edge" onclick="appendToDisplay('*')">*</button>
+          <button class="button" onclick="appendToDisplay('9')">9</button>
+          <button class="button" onclick="appendToDisplay('8')">8</button>
+          <button class="button" onclick="appendToDisplay('7')">7</button>
+
+          <button class="button edge" onclick="appendToDisplay('-')">-</button>
+          <button class="button" onclick="appendToDisplay('6')">6</button>
+          <button class="button" onclick="appendToDisplay('5')">5</button>
+          <button class="button" onclick="appendToDisplay('4')">4</button>
+
+          <button class="button edge" onclick="appendToDisplay('+')">+</button>
+          <button class="button" onclick="appendToDisplay('3')">3</button>
+          <button class="button" onclick="appendToDisplay('2')">2</button>
+          <button class="button" onclick="appendToDisplay('1')">1</button>
+
+          <button class="button equal" onclick="calculate()">=</button>
+          <button class="button" onclick="appendToDisplay('.')">.</button>
+          <button class="button" onclick="appendToDisplay('0')">0</button>
+          <button class="button" onclick="appendToDisplay('%')">%</button>
+
+          <button class="button trigonometry" onclick="appendToDisplay('sin(')">
+            sin
+          </button>
+          <button class="button trigonometry" onclick="appendToDisplay('cos(')">
+            cos
+          </button>
+          <button class="button trigonometry" onclick="appendToDisplay('tan(')">
+            tan
+          </button>
+          <button
+            class="button trigonometry"
+            onclick="appendToDisplay('cotg(')"
+          >
+            cotg
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="bottom-bar">
-      <a href="javascript:location.reload(true)">
+      <button data-page="page5" id="calc">
         <svg
-          viewBox="0 0 511.494 511.494"
           width="25"
           height="25"
-          fill="#293753"
+          viewBox="0 0 32 32"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:svg="http://www.w3.org/2000/svg"
         >
-          <g>
-            <path
-              d="M478.291,255.492c-16.133,0.143-29.689,12.161-31.765,28.16c-15.37,105.014-112.961,177.685-217.975,162.315   S50.866,333.006,66.236,227.992S179.197,50.307,284.211,65.677c35.796,5.239,69.386,20.476,96.907,43.959l-24.107,24.107   c-8.33,8.332-8.328,21.84,0.004,30.17c4.015,4.014,9.465,6.262,15.142,6.246h97.835c11.782,0,21.333-9.551,21.333-21.333V50.991   c-0.003-11.782-9.556-21.331-21.338-21.329c-5.655,0.001-11.079,2.248-15.078,6.246l-28.416,28.416   C320.774-29.34,159.141-19.568,65.476,86.152S-18.415,353.505,87.304,447.17s267.353,83.892,361.017-21.828   c32.972-37.216,54.381-83.237,61.607-132.431c2.828-17.612-9.157-34.183-26.769-37.011   C481.549,255.641,479.922,255.505,478.291,255.492z"
-            />
+          <defs id="defs535">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath545">
+              <path d="M 0,24 H 24 V 0 H 0 Z" id="path543" />
+            </clipPath>
+          </defs>
+          <g id="g537" transform="matrix(1.3333333,0,0,-1.3333333,0,32)">
+            <g id="g539">
+              <g id="g541" clip-path="url(#clipPath545)">
+                <g id="g547" transform="translate(18,1)">
+                  <path
+                    d="m 0,0 h -12 c -2.209,0 -4,1.791 -4,4 v 14 c 0,2.209 1.791,4 4,4 H 0 c 2.209,0 4,-1.791 4,-4 V 4 C 4,1.791 2.209,0 0,0 Z"
+                    style="
+                      fill: none;
+                      stroke: #293753;
+                      stroke-width: 2;
+                      stroke-linecap: round;
+                      stroke-linejoin: round;
+                      stroke-miterlimit: 10;
+                      stroke-dasharray: none;
+                      stroke-opacity: 1;
+                    "
+                    id="path549"
+                  />
+                </g>
+                <g id="g551" transform="translate(16,15)">
+                  <path
+                    d="m 0,0 h -8 c -1.104,0 -2,0.896 -2,2 0,1.104 0.896,2 2,2 H 0 C 1.104,4 2,3.104 2,2 2,0.896 1.104,0 0,0 Z"
+                    style="
+                      fill: none;
+                      stroke: #293753;
+                      stroke-width: 2;
+                      stroke-linecap: round;
+                      stroke-linejoin: round;
+                      stroke-miterlimit: 10;
+                      stroke-dasharray: none;
+                      stroke-opacity: 1;
+                    "
+                    id="path553"
+                  />
+                </g>
+                <g id="g555" transform="translate(6,11)">
+                  <path
+                    d="m 0,0 c -0.552,0 -1,-0.447 -1,-1 0,-0.553 0.448,-1 1,-1 0.552,0 1,0.447 1,1 0,0.553 -0.448,1 -1,1"
+                    style="
+                      fill: #293753;
+                      fill-opacity: 1;
+                      fill-rule: nonzero;
+                      stroke: none;
+                    "
+                    id="path557"
+                  />
+                </g>
+                <g id="g559" transform="translate(10,11)">
+                  <path
+                    d="m 0,0 c -0.552,0 -1,-0.447 -1,-1 0,-0.553 0.448,-1 1,-1 0.552,0 1,0.447 1,1 0,0.553 -0.448,1 -1,1"
+                    style="
+                      fill: #293753;
+                      fill-opacity: 1;
+                      fill-rule: nonzero;
+                      stroke: none;
+                    "
+                    id="path561"
+                  />
+                </g>
+                <g id="g563" transform="translate(14,11)">
+                  <path
+                    d="m 0,0 c -0.552,0 -1,-0.447 -1,-1 0,-0.553 0.448,-1 1,-1 0.552,0 1,0.447 1,1 0,0.553 -0.448,1 -1,1"
+                    style="
+                      fill: #293753;
+                      fill-opacity: 1;
+                      fill-rule: nonzero;
+                      stroke: none;
+                    "
+                    id="path565"
+                  />
+                </g>
+                <g id="g567" transform="translate(6,7)">
+                  <path
+                    d="m 0,0 c -0.552,0 -1,-0.447 -1,-1 0,-0.553 0.448,-1 1,-1 0.552,0 1,0.447 1,1 0,0.553 -0.448,1 -1,1"
+                    style="
+                      fill: #293753;
+                      fill-opacity: 1;
+                      fill-rule: nonzero;
+                      stroke: none;
+                    "
+                    id="path569"
+                  />
+                </g>
+                <g id="g571" transform="translate(10,7)">
+                  <path
+                    d="m 0,0 c -0.552,0 -1,-0.447 -1,-1 0,-0.553 0.448,-1 1,-1 0.552,0 1,0.447 1,1 0,0.553 -0.448,1 -1,1"
+                    style="
+                      fill: #293753;
+                      fill-opacity: 1;
+                      fill-rule: nonzero;
+                      stroke: none;
+                    "
+                    id="path573"
+                  />
+                </g>
+                <g id="g575" transform="translate(18,11)">
+                  <path
+                    d="m 0,0 c -0.552,0 -1,-0.447 -1,-1 0,-0.553 0.448,-1 1,-1 0.552,0 1,0.447 1,1 0,0.553 -0.448,1 -1,1"
+                    style="
+                      fill: #293753;
+                      fill-opacity: 1;
+                      fill-rule: nonzero;
+                      stroke: none;
+                    "
+                    id="path577"
+                  />
+                </g>
+                <g id="g579" transform="translate(14,6)">
+                  <path
+                    d="M 0,0 H 4"
+                    style="
+                      fill: none;
+                      stroke: #293753;
+                      stroke-width: 2;
+                      stroke-linecap: round;
+                      stroke-linejoin: round;
+                      stroke-miterlimit: 10;
+                      stroke-dasharray: none;
+                      stroke-opacity: 1;
+                    "
+                    id="path581"
+                  />
+                </g>
+              </g>
+            </g>
           </g>
         </svg>
-      </a>
+      </button>
 
       <div class="btns-bar">
         <button data-page="page1" class="active">خانه</button>

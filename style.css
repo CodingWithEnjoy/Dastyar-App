@@ -6,7 +6,7 @@
 :root {
   --pink: #ff657f;
   --blue: #3f6bff;
-  --green: #4caf50;
+  --green: #5fc791;
   --purple: #7f75bd;
 
   --bg-color: #e6f1f5;
@@ -80,7 +80,7 @@ input {
   box-shadow: var(--bg-color) 0px 0px 10px 10px;
 }
 
-.bottom-bar a {
+.bottom-bar button#calc {
   background: var(--bg4-color);
   border-radius: 15px;
   display: flex;
@@ -587,4 +587,67 @@ button.delete {
   align-items: center;
   justify-content: center;
   border-radius: 15px;
+}
+
+.page5 {
+  height: 80%
+}
+
+.calculator {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg2-color);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.display {
+  height: 60px;
+  background: var(--bg4-color);
+  color: #000;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.button {
+  padding: 10px;
+  background: var(--bg-color);
+  border-radius: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: 0.4s;
+  min-width: 30px;
+}
+
+.equal {
+  background-color: var(--green);
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.edge {
+  color: var(--purple);
+  font-weight: 700;
+}
+
+.trigonometry {
+  background: var(--bg3-color);
 }

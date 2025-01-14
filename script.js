@@ -1,3 +1,7 @@
+document.addEventListener("contextmenu", (event) => {
+  event.preventDefault(); 
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".bottom-bar button").forEach((button) => {
     button.addEventListener("click", () => {
@@ -403,4 +407,49 @@ if ("serviceWorker" in navigator) {
     .catch((error) =>
       console.error("Service Worker Registration Failed:", error)
     );
+}
+
+let display = document.getElementById("display");
+let currentInput = "";
+
+function appendToDisplay(value) {
+  currentInput += value;
+  display.innerText = currentInput;
+}
+
+function calculate() {
+  try {
+    let expression = currentInput
+      .replace(/sin\(/g, "Math.sin((Math.PI / 180)*")
+      .replace(/cos\(/g, "Math.cos((Math.PI / 180)*")
+      .replace(/tan\(/g, "Math.tan((Math.PI / 180)*")
+      .replace(/cotg\(/g, "1/Math.tan((Math.PI / 180)*")
+      .replace(/%/g, "/100");
+
+    let result = eval(expression);
+
+    result = Math.round(result * 1000000000) / 1000000000;
+
+    animateDisplay();
+    setTimeout(() => {
+      display.innerText = result;
+      currentInput = result.toString();
+    }, 100);
+  } catch (error) {
+    display.innerText = "چرت و پرت نزن :/";
+    currentInput = "";
+  }
+}
+
+function backspace() {
+  currentInput = currentInput.slice(0, -1);
+  display.innerText = currentInput;
+}
+
+function animateDisplay() {
+  display.style.transition = "transform 0.1s ease";
+  display.style.transform = "translateY(-20px)";
+  setTimeout(() => {
+    display.style.transform = "translateY(0)";
+  }, 100);
 }
