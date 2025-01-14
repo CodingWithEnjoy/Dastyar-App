@@ -590,7 +590,7 @@ button.delete {
 }
 
 .page5 {
-  height: 80%
+  height: 80%;
 }
 
 .calculator {
@@ -650,4 +650,26 @@ button.delete {
 
 .trigonometry {
   background: var(--bg3-color);
+}
+
+.bookmarks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.bookmark {
+  height: 60px;
+  width: 90px;
+  background: var(--bg2-color);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookmark img {
+  width: 50px;
 }
