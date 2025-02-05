@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTaskLists();
 });
 
-const apiUrl = "https://api.dastyar.io/express/financial-item";
+const apiUrl = "https://corsproxy.io/?url=https://api.dastyar.io/express/financial-item";
 
 async function fetchData() {
   try {
