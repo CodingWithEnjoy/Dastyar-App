@@ -156,30 +156,28 @@ const apiUrl = "https://corsproxy.io/?url=https://api.dastyar.io/express/financi
 async function fetchData() {
   try {
     const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
     const data = await response.json();
+    console.log("API Response:", data);
+
+    if (!Array.isArray(data)) {
+      throw new Error("Data is not an array");
+    }
 
     const tileContainer = document.getElementById("tileContainer");
-
-    const formattedValue = (price) => {
-      const number = Number(price);
-
-      if (number >= 1000000) {
-        return (number / 1000000).toFixed(1) + "M";
-      } else if (number >= 1000) {
-        return (number / 1000).toFixed(1) + "K";
-      } else {
-        return number.toLocaleString();
-      }
-    };
+    tileContainer.innerHTML = ""; // Clear previous content
 
     data.forEach((item) => {
       const tile = document.createElement("div");
       tile.className = "tile";
 
-      const changeColor =
-        item.change > 0 ? "green" : item.change < 0 ? "red" : "#fff";
+      const changeColor = item.change > 0 ? "green" : item.change < 0 ? "red" : "#fff";
 
-      const formattedPrice = formattedValue(item.price);
+      const formattedPrice = new Intl.NumberFormat().format(item.price);
       const formattedChange = Number(item.change).toFixed(2);
 
       tile.innerHTML = `
@@ -188,7 +186,7 @@ async function fetchData() {
               <h3>${item.title}</h3>
               <p>${item.key}</p>
             </div>
-            <img src="https://liara-s3.dastyar.io/Img/icons/finance/${item.image}" alt="${item.title}">
+            <img src="${item.icon}" alt="${item.title}">
           </div>
           <div class="value">
             ${formattedPrice}
