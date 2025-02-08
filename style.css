@@ -265,13 +265,13 @@ input {
   width: 75%;
   border-radius: 15px;
 }
-
+/* 
 .task-list li.completed {
   background-color: var(--bg3-color);
-}
+} */
 
 .task-list li.completed span {
-  text-decoration: line-through;
+  filter: blur(4px);
 }
 
 .task-list .btns {
