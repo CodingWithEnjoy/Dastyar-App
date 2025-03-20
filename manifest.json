@@ -1,0 +1,21 @@
+{
+  "name": "Dastyar",
+  "short_name": "Dastyar",
+  "description": "PWA Dastyar",
+  "start_url": "https://codingwithenjoy.github.io/Dastyar-App/",
+  "display": "standalone",
+  "background_color": "#7f75bd",
+  "theme_color": "#7f75bd",
+  "icons": [
+    {
+      "src": "assets/logo1.jpg",
+      "sizes": "1080x1080",
+      "type": "image/jpg"
+    },
+    {
+      "src": "assets/logo2.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ]
+}

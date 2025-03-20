@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+    <meta name="theme-color" content="#d4e2e5" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="shortcut icon" href="assets/logo1.jpg" type="image/jpg" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Dastyar</title>
+  </head>
+
+  <body>
+    <div class="page page1 active">
+      <div class="page1-row">
+        <div class="clock">
+          <h2 id="time">--:--</h2>
+          <p id="date"></p>
+          <p id="date2" dir="ltr"></p>
+        </div>
+        <div class="weather">
+          <div class="row">
+            <img id="weather-image" />
+            <h2 id="weather"></h2>
+          </div>
+          <p id="date-description"></p>
+          <p id="location"></p>
+        </div>
+      </div>
+
+      <div id="aqi-card">
+        <div id="aqi-info">
+          <h2 id="city-name">تهران</h2>
+          <p id="dominant-pol">آلودگی : PM2.5</p>
+        </div>
+        <p id="aqi-value"></p>
+      </div>
+
+      <div class="bookmarks">
+        <div
+          onclick="location.href='https://yt.openinapp.co/y0y4h'"
+          class="bookmark"
+        >
+          <img src="logo/youtube.png" />
+        </div>
+        <div
+          onclick="location.href='https://openinapp.link/mo7zt'"
+          class="bookmark"
+        >
+          <img src="logo/soundcloud.png" />
+        </div>
+        <div
+          onclick="location.href='https://openinapp.link/g9zm8'"
+          class="bookmark"
+        >
+          <img src="logo/chatgpt.png" />
+        </div>
+        <div
+          onclick="location.href='https://openinapp.link/poz7c'"
+          class="bookmark"
+        >
+          <img src="logo/digikala.png" />
+        </div>
+        <div
+          onclick="location.href='https://openinapp.link/23jbs'"
+          class="bookmark"
+        >
+          <img src="logo/bale.png" />
+        </div>
+      </div>
+
+      <ul class="task-list"></ul>
+    </div>
+
+    <div class="page page2">
+      <div class="todo">
+        <div class="inputs">
+          <div class="col">
+            <input type="text" id="task-title" placeholder="تسک" />
+            <input type="text" id="task-description" placeholder="توضیحات" />
+
+            <div class="category-selection">
+              <button class="category-btn active" data-category="daily">
+                امروز
+              </button>
+              <button class="category-btn" data-category="education">
+                درسی
+              </button>
+              <button class="category-btn" data-category="entertainment">
+                سرگرمی
+              </button>
+              <button class="category-btn" data-category="other">سایر</button>
+            </div>
+          </div>
+
+          <button id="add-task-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+              height="35px"
+              width="35px"
+              fill="#293753"
+            >
+              <path
+                d="M423.41-424.17H221.24q-23.67 0-40.13-16.63-16.46-16.62-16.46-39.96 0-23.67 16.46-40.13t40.13-16.46h202.17v-202.41q0-23.34 16.63-39.96 16.62-16.63 39.96-16.63t39.96 16.63q16.63 16.62 16.63 39.96v202.41h202.17q23.67 0 40.13 16.46t16.46 40.01q0 23.55-16.46 40.13-16.46 16.58-40.13 16.58H536.59V-222q0 23.34-16.63 39.96-16.62 16.63-39.96 16.63t-39.96-16.63q-16.63-16.62-16.63-39.96v-202.17Z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="filters">
+          <button class="filter-btn active" data-category="all">همه</button>
+          <button class="filter-btn" data-category="daily">امروز</button>
+          <button class="filter-btn" data-category="education">درسی</button>
+          <button class="filter-btn" data-category="entertainment">
+            سرگرمی
+          </button>
+          <button class="filter-btn" data-category="other">سایر</button>
+        </div>
+
+        <ul class="task-list"></ul>
+      </div>
+    </div>
+
+    <div class="page page3">
+      <div id="tileContainer"></div>
+    </div>
+
+    <div class="page page4">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="digiato-list">دیجیاتو</button>
+        <button class="tab-btn" data-tab="vigiato-list">ویجیاتو</button>
+        <button class="tab-btn" data-tab="isna-list">مهر نیوز</button>
+      </div>
+
+      <div id="digiato-list" class="tab-content active">
+        <ul class="news-list"></ul>
+      </div>
+      <div id="vigiato-list" class="tab-content">
+        <ul class="news-list"></ul>
+      </div>
+      <div id="isna-list" class="tab-content">
+        <ul class="news-list"></ul>
+      </div>
+
+      <div id="news-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <div id="modal-img"></div>
+          <div id="modal-title"></div>
+          <div id="modal-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page page5">
+      <div class="calculator">
+        <div class="display" id="display" dir="ltr"></div>
+        <div class="buttons">
+          <button class="button edge" onclick="appendToDisplay('/')">/</button>
+          <button class="button edge" onclick="appendToDisplay(')')">(</button>
+          <button class="button edge" onclick="appendToDisplay('(')">)</button>
+          <button class="button edge" onclick="backspace()">C</button>
+
+          <button class="button edge" onclick="appendToDisplay('*')">*</button>
+          <button class="button" onclick="appendToDisplay('9')">9</button>
+          <button class="button" onclick="appendToDisplay('8')">8</button>
+          <button class="button" onclick="appendToDisplay('7')">7</button>
+
+          <button class="button edge" onclick="appendToDisplay('-')">-</button>
+          <button class="button" onclick="appendToDisplay('6')">6</button>
+          <button class="button" onclick="appendToDisplay('5')">5</button>
+          <button class="button" onclick="appendToDisplay('4')">4</button>
+
+          <button class="button edge" onclick="appendToDisplay('+')">+</button>
+          <button class="button" onclick="appendToDisplay('3')">3</button>
+          <button class="button" onclick="appendToDisplay('2')">2</button>
+          <button class="button" onclick="appendToDisplay('1')">1</button>
+
+          <button class="button equal" onclick="calculate()">=</button>
+          <button class="button" onclick="appendToDisplay('.')">.</button>
+          <button class="button" onclick="appendToDisplay('0')">0</button>
+          <button class="button" onclick="appendToDisplay('%')">%</button>
+
+          <button class="button trigonometry" onclick="appendToDisplay('sin(')">
+            sin
+          </button>
+          <button class="button trigonometry" onclick="appendToDisplay('cos(')">
+            cos
+          </button>
+          <button class="button trigonometry" onclick="appendToDisplay('tan(')">
+            tan
+          </button>
+          <button
+            class="button trigonometry"
+            onclick="appendToDisplay('cotg(')"
+          >
+            cotg
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="page page6">
+      <h2>کجا میخوای بری ؟</h2>
+
+      <div class="page-btns">
+        <button data-page="page1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="30"
+            height="30"
+            class="main-grid-item-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+          خانه - همه چیز یکجا
+        </button>
+        <button data-page="page2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="30"
+            height="30"
+            class="main-grid-item-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <path
+              d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+            />
+            <rect height="4" rx="1" ry="1" width="8" x="8" y="2" />
+          </svg>
+          تسک ها - مدیریت برنامه ها
+        </button>
+        <button data-page="page3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="30"
+            height="30"
+            class="main-grid-item-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <line x1="12" x2="12" y1="1" y2="23" />
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>
+          قیمت - تمامی ارز ها و رمز ارز ها
+        </button>
+        <button data-page="page4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="30"
+            height="30"
+            class="main-grid-item-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <path d="M4 11a9 9 0 0 1 9 9" />
+            <path d="M4 4a16 16 0 0 1 16 16" />
+            <circle cx="5" cy="19" r="1" />
+          </svg>
+          اخبار - اخبار بروز تکنولوژی و گیم
+        </button>
+        <button data-page="page5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="30"
+            height="30"
+            class="main-grid-item-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="6" r="2" />
+            <line x1="5" x2="19" y1="12" y2="12" />
+            <circle cx="12" cy="18" r="2" />
+          </svg>
+          ماشین حساب - حساب و کتاب به سرعت
+        </button>
+        <button data-page="page7">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="30"
+            height="30"
+            class="main-grid-item-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <line x1="8" x2="8" y1="19" y2="21" />
+            <line x1="8" x2="8" y1="13" y2="15" />
+            <line x1="16" x2="16" y1="19" y2="21" />
+            <line x1="16" x2="16" y1="13" y2="15" />
+            <line x1="12" x2="12" y1="21" y2="23" />
+            <line x1="12" x2="12" y1="15" y2="17" />
+            <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25" />
+          </svg>
+          آب و هوا - همه اطلاعات لازم
+        </button>
+        <button data-page="page8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="30"
+            height="28"
+            class="main-grid-item-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <rect height="16" rx="2" ry="2" width="22" x="1" y="4" />
+            <line x1="1" x2="23" y1="10" y2="10" />
+          </svg>
+          تبدیل ارز - تبدیل مقدار ارز ها به هم
+        </button>
+      </div>
+    </div>
+
+    <div class="page page7">
+      <h2>آب و هوای تهران</h2>
+
+      <div id="weather-container">
+        <div>
+          <strong>وضعیت آب و هوا:</strong>
+          <span id="weather-description">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>دمای فعلی:</strong>
+          <span id="temperature">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>احساس دما:</strong>
+          <span id="feels-like">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>حداقل دما:</strong>
+          <span id="temp-min">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>حداکثر دما:</strong>
+          <span id="temp-max">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>فشار جو:</strong>
+          <span id="pressure">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>رطوبت:</strong> <span id="humidity">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>دید:</strong> <span id="visibility">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>سرعت باد:</strong>
+          <span id="wind-speed">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>ابری بودن:</strong>
+          <span id="clouds">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>باران (1 ساعت):</strong>
+          <span id="rain">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>طلوع آفتاب:</strong>
+          <span id="sunrise">در حال بارگذاری...</span>
+        </div>
+        <div>
+          <strong>غروب آفتاب:</strong>
+          <span id="sunset">در حال بارگذاری...</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page page8 active">
+      <h2>تبدیل ارز</h2>
+      <div class="currency-converter">
+        <div class="from">
+          <div class="custom-dropdown" id="fromDropdown">
+            <div class="selected" onclick="toggleDropdown('fromDropdown')">
+              انتخاب ارز
+            </div>
+            <ul class="dropdown-list"></ul>
+          </div>
+          <input
+            type="text"
+            id="amount"
+            autocomplete="off"
+            placeholder="مقدار"
+            oninput="formatInput(this)"
+          />
+        </div>
+
+        <div class="to">
+          <div class="custom-dropdown" id="toDropdown">
+            <div class="selected" onclick="toggleDropdown('toDropdown')">
+              انتخاب ارز
+            </div>
+            <ul class="dropdown-list"></ul>
+          </div>
+          <p id="result">نتیجه :</p>
+        </div>
+
+        <button onclick="convertCurrency()">تبدیل</button>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <button id="more-btn" data-page="page6">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          class="main-grid-item-icon"
+          fill="none"
+          stroke="#293753"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="1" />
+          <circle cx="12" cy="5" r="1" />
+          <circle cx="12" cy="19" r="1" />
+        </svg>
+      </button>
+
+      <div class="btns-bar">
+        <button data-page="page1" class="active">خانه</button>
+        <button data-page="page2">تسک ها</button>
+        <button data-page="page3">قیمت</button>
+        <button data-page="page4">اخبار</button>
+      </div>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
