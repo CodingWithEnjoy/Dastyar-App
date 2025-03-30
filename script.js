@@ -2,6 +2,28 @@ document.addEventListener("contextmenu", (event) => {
   event.preventDefault();
 });
 
+let touchStartY = 0;
+
+document.addEventListener(
+  "touchstart",
+  (event) => {
+    touchStartY = event.touches[0].clientY;
+  },
+  { passive: true }
+);
+
+document.addEventListener(
+  "touchmove",
+  (event) => {
+    let touchY = event.touches[0].clientY;
+
+    if (window.scrollY === 0 && touchY > touchStartY) {
+      event.preventDefault();
+    }
+  },
+  { passive: false }
+);
+
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".bottom-bar button").forEach((button) => {
     button.addEventListener("click", () => {
@@ -503,7 +525,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const feelsLike = data.main.feels_like;
       const tempMin = data.main.temp_min;
       const tempMax = data.main.temp_max;
-      const pressure = data.main.pressure;
       const humidity = data.main.humidity;
       const visibility = data.visibility;
       const windSpeed = data.wind.speed;
@@ -522,7 +543,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("feels-like").textContent = `${feelsLike}°C`;
       document.getElementById("temp-min").textContent = `${tempMin}°C`;
       document.getElementById("temp-max").textContent = `${tempMax}°C`;
-      document.getElementById("pressure").textContent = `${pressure} hPa`;
       document.getElementById("humidity").textContent = `${humidity}%`;
       document.getElementById("visibility").textContent = `${visibility} متر`;
       document.getElementById(

@@ -47,6 +47,10 @@ body {
   transition: 0.4s;
 }
 
+body.no-scroll {
+  overflow: hidden; /* Disable background scroll */
+}
+
 a,
 button {
   all: unset;
@@ -748,7 +752,7 @@ button.delete {
 
 .page-btns button {
   width: 100%;
-  padding: 10px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -778,7 +782,7 @@ button.delete {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
@@ -801,7 +805,7 @@ button.delete {
 #weather-container div:nth-child(8),
 #weather-container div:nth-child(9),
 #weather-container div:nth-child(12) {
-  width: 55%;
+  width: 60%;
 }
 
 #weather-container div:nth-child(2),
@@ -810,7 +814,7 @@ button.delete {
 #weather-container div:nth-child(7),
 #weather-container div:nth-child(10),
 #weather-container div:nth-child(11) {
-  width: 35%;
+  width: 37%;
 }
 
 strong {
